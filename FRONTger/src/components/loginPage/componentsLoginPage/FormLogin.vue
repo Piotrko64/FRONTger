@@ -37,7 +37,6 @@ function updateData(type: "email" | "password", value: string) {
     <form @submit.prevent="sendLoginForm">
         <h1>LOGIN</h1>
         <BaseInput @updateData="updateData" name="email" :minLength="7" typeInput="email" />
-
         <BaseInput @updateData="updateData" typeInput="password" name="password" :minLength="5" />
         <p v-if="isErrorInForm">There are errors in the form</p>
         <SimpleLoading v-if="isLoading" />

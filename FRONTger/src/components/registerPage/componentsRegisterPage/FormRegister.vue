@@ -10,38 +10,36 @@ import IsAccountText from "../../../ui/form/IsAccountText.vue";
 const isLoading = ref(false);
 const isErrorInForm = ref(false);
 
-// const dataLogin: {
-//     email: string;
-//     password: string;
-//     describe: string;
-//     nick: string;
-//     humor: "sad" | "happy" | "normal";
-// } = reactive({
-//     email: "",
-//     password: "",
-//     describe: "",
-//     nick: "",
-//     humor: "",
-// });
+const dataLogin: {
+    email: string;
+    password: string;
+    describe: string;
+    nick: string;
+} = reactive({
+    email: "",
+    password: "",
+    describe: "",
+    nick: "",
+});
 
-function sendRegisterForm() {
-    isErrorInForm.value = false;
-    // if (!isValidRegisterForm(dataLogin.email, dataLogin.password)) {
-    //     isErrorInForm.value = true;
-    //     return;
-    // }
-    // isLoading.value = true;
-    // console.log(dataLogin);
-}
+// function sendRegisterForm() {
+//     isErrorInForm.value = false;
+//     if (!isValidRegisterForm(dataLogin.email, dataLogin.password)) {
+//         isErrorInForm.value = true;
+//         return;
+//     }
+//     isLoading.value = true;
+//     console.log(dataLogin);
+// }
 
-function updateData(type: "email" | "password" | "nick" | "describe" | "humor", value: string) {
+function updateData(type: "email" | "password" | "nick" | "describe", value: string) {
     isErrorInForm.value = false;
     // dataLogin[type] = value;
 }
 </script>
 
 <template>
-    <form @submit.prevent="sendRegisterForm">
+    <form @submit.prevent="">
         <h1>Register</h1>
         <BaseInput
             @updateData="updateData"
