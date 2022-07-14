@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import BackgroundLogin from "./componentsLoginPage/BackgroundLogin.vue";
+import StartBackground from "../../ui/background/StartBackground.vue";
 import FormLogin from "./componentsLoginPage/FormLogin.vue";
 </script>
 
 <template>
-    <BackgroundLogin />
+    <StartBackground />
     <div class="formLogin">
         <FormLogin />
     </div>

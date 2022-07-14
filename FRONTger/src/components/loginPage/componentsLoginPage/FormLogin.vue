@@ -4,6 +4,7 @@ import BaseInput from "../../../ui/form/BaseInput.vue";
 import BaseButton from "../../../ui/form/BaseButton.vue";
 import { isValidLoginForm } from "./utils/isValidLoginForm";
 import SimpleLoading from "../../../ui/loading/simpleLoading.vue";
+import IsAccountText from "../../../ui/form/IsAccountText.vue";
 
 const isLoading = ref(false);
 const isErrorInForm = ref(false);
@@ -41,6 +42,7 @@ function updateData(type: "email" | "password", value: string) {
         <p v-if="isErrorInForm">There are errors in the form</p>
         <SimpleLoading v-if="isLoading" />
         <BaseButton type="submit" text="Login" :disabled="isErrorInForm || isLoading" />
+        <IsAccountText questionText="You do not have an account?" textToToggle="Sign up" route="/register" />
     </form>
 </template>
 <style lang="scss" scoped>

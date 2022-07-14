@@ -2,9 +2,7 @@
 import LoginPage from "./pages/LoginPage.vue";
 </script>
 
-<template>
-    <LoginPage />
-</template>
+<template><router-view></router-view></template>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
