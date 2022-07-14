@@ -10,14 +10,15 @@ interface IconInterface {
 export const dataIconsHumor: Array<IconInterface> = [
     {
         icon: EmojiFrown,
-        name: "happy",
+        name: "sad",
     },
+
     {
-        icon: EmojiLaughing,
+        icon: EmojiSmile,
         name: "normal",
     },
     {
-        icon: EmojiSmile,
-        name: "sad",
+        icon: EmojiLaughing,
+        name: "happy",
     },
 ];

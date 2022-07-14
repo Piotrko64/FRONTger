@@ -2,7 +2,7 @@
 import { reactive, ref } from "vue";
 import BaseInput from "../../../ui/form/BaseInput.vue";
 import BaseButton from "../../../ui/form/BaseButton.vue";
-import { isValidLoginForm } from "./utils/isValidLoginForm";
+import { isValidForm } from "../../utils/isValidForm";
 import SimpleLoading from "../../../ui/loading/simpleLoading.vue";
 import IsAccountText from "../../../ui/form/IsAccountText.vue";
 
@@ -19,7 +19,7 @@ const dataLogin: {
 
 function sendLoginForm() {
     isErrorInForm.value = false;
-    if (!isValidLoginForm(dataLogin.email, dataLogin.password)) {
+    if (!isValidForm(dataLogin.email, dataLogin.password)) {
         isErrorInForm.value = true;
         return;
     }

@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import { ref } from "vue";
+
 const { name } = defineProps<{ name: string }>();
+const emits = defineEmits(["updateData"]);
+
+const valueInput = ref<string>("");
 </script>
 <template>
     <div class="entireTextarea">
         <label for="field">{{ name }}</label>
-        <textarea id="field"> </textarea>
+        <textarea id="field" @input="emits('updateData', name, valueInput)" v-model="valueInput"> </textarea>
     </div>
 </template>
 
