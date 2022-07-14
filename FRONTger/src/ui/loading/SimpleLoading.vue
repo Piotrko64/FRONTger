@@ -10,6 +10,7 @@
         <div class="sk-cube sk-cube8"></div>
         <div class="sk-cube sk-cube9"></div>
     </div>
+    <p>Wait...</p>
 </template>
 <style lang="scss" scoped>
 .sk-cube-grid {
