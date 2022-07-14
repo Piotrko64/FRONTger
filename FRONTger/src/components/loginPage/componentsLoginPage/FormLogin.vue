@@ -36,8 +36,14 @@ function updateData(type: "email" | "password", value: string) {
 <template>
     <form @submit.prevent="sendLoginForm">
         <h1>LOGIN</h1>
-        <BaseInput @updateData="updateData" name="email" :minLength="7" typeInput="email" />
-        <BaseInput @updateData="updateData" typeInput="password" name="password" :minLength="5" />
+        <BaseInput @updateData="updateData" name="email" :minLength="7" typeInput="email" RequiredInput />
+        <BaseInput
+            @updateData="updateData"
+            typeInput="password"
+            name="password"
+            :minLength="5"
+            RequiredInput
+        />
         <p v-if="isErrorInForm">There are errors in the form</p>
         <SimpleLoading v-if="isLoading" />
         <BaseButton type="submit" text="Login" :disabled="isErrorInForm || isLoading" />
@@ -52,6 +58,7 @@ form {
     color: white;
     font-family: "Lato", sans-serif;
     border-radius: 15px;
+
     p {
         margin: 0;
         color: red;

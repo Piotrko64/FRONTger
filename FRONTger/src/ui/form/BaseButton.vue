@@ -6,7 +6,7 @@ const {
 } = defineProps<{
     text: string;
     type: "button" | "submit";
-    disabled?: boolean;
+    disabled: boolean;
 }>();
 </script>
 

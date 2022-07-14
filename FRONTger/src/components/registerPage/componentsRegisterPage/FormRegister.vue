@@ -49,7 +49,7 @@ function updateData(type: "email" | "password" | "nick" | "describe" | "humor", 
         <BaseInput @updateData="updateData" name="email" :minLength="7" typeInput="email" />
         <BaseInput @updateData="updateData" typeInput="password" name="password" :minLength="5" />
         <TheHumors @updateData="updateData" />
-        <BaseTextarea name="describe" @updateData="updateData" />
+        <BaseTextarea name="describe" @updateData="updateData" placeholder="Write something about you!" />
         <p v-if="isErrorInForm">There are errors in the form</p>
         <SimpleLoading v-if="isLoading" />
 

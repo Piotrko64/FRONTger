@@ -2,12 +2,12 @@
 import { Ref, ref, watch } from "vue";
 
 const {
-    notRequiredInput,
+    RequiredInput,
     typeInput = "text",
     name,
     minLength,
 } = defineProps<{
-    notRequiredInput?: boolean;
+    RequiredInput?: boolean;
     typeInput?: string;
     name: string;
     minLength: number;
@@ -22,7 +22,7 @@ const isValid: Ref<boolean> = ref(true);
 
 watch([isBlur], () => {
     isValid.value = false;
-    if (!notRequiredInput && valueInput.value.trim() === "") {
+    if (RequiredInput && valueInput.value.trim() === "") {
         errorInputMesage.value = "This Input is required!";
     } else if (valueInput.value.length < minLength) {
         errorInputMesage.value = `The minimum length is ${minLength}`;
@@ -41,11 +41,10 @@ watch([isBlur], () => {
             @input="emits('updateData', name, valueInput)"
             :type="typeInput"
             v-model="valueInput"
-            :required="notRequiredInput"
             :id="name"
             @blur="isBlur = true"
             @focus="isBlur = false"
-            :placeholder="notRequiredInput ? 'Optional' : ''"
+            :placeholder="RequiredInput ? '' : 'Optional'"
         />
         <p v-if="!isValid && isBlur">{{ errorInputMesage }}</p>
     </div>

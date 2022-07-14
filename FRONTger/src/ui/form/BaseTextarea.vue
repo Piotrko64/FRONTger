@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const { name } = defineProps<{ name: string }>();
+const { name, placeholder } = defineProps<{ name: string; placeholder: string }>();
 const emits = defineEmits(["updateData"]);
 
 const valueInput = ref<string>("");
@@ -9,7 +9,13 @@ const valueInput = ref<string>("");
 <template>
     <div class="entireTextarea">
         <label for="field">{{ name }}</label>
-        <textarea id="field" @input="emits('updateData', name, valueInput)" v-model="valueInput"> </textarea>
+        <textarea
+            id="field"
+            @input="emits('updateData', name, valueInput)"
+            v-model="valueInput"
+            :placeholder="placeholder"
+        >
+        </textarea>
     </div>
 </template>
 
