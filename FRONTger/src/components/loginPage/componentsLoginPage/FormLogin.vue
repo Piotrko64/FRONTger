@@ -5,8 +5,13 @@ import BaseButton from "../../../ui/form/BaseButton.vue";
 
 const email = ref("");
 const password = ref("");
+const isValidForm = ref(false);
 
 function sendLoginForm() {
+    if (!isValidForm) {
+        console.log("bad");
+        return;
+    }
     console.log("a");
 }
 
