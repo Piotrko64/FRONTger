@@ -8,12 +8,12 @@ const {
     minLength,
 } = defineProps<{
     notRequiredInput?: boolean;
-    typeInput: string;
+    typeInput?: string;
     name: string;
     minLength: number;
 }>();
 
-const emits = defineEmits(["updateInput"]);
+const emits = defineEmits(["updateData"]);
 
 const errorInputMesage: Ref<string> = ref("");
 const isBlur: Ref<boolean> = ref(false);
@@ -26,7 +26,7 @@ watch([isBlur], () => {
         errorInputMesage.value = "This Input is required!";
     } else if (valueInput.value.length < minLength) {
         errorInputMesage.value = `The minimum length is ${minLength}`;
-    } else if (typeInput === "email" && !typeInput.includes("@")) {
+    } else if (typeInput === "email" && !valueInput.value.includes("@")) {
         errorInputMesage.value = `Wrong Email!`;
     } else {
         isValid.value = true;
@@ -38,7 +38,7 @@ watch([isBlur], () => {
     <div class="flexInput">
         <label :for="name">{{ name }}</label>
         <input
-            @input="emits('updateInput', valueInput)"
+            @input="emits('updateData', name, valueInput)"
             :type="typeInput"
             v-model="valueInput"
             :required="notRequiredInput"
@@ -72,6 +72,7 @@ watch([isBlur], () => {
         box-sizing: border-box;
         font-family: "Lato";
         font-weight: 400;
+        width: 100%;
         &:focus-visible {
             border: 1px solid rgb(255, 255, 255);
         }
@@ -79,7 +80,7 @@ watch([isBlur], () => {
     p {
         margin: 0;
         color: red;
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }
 </style>
