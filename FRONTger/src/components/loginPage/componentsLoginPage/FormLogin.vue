@@ -2,7 +2,7 @@
 import { reactive, ref } from "vue";
 import BaseInput from "../../../ui/form/BaseInput.vue";
 import BaseButton from "../../../ui/form/BaseButton.vue";
-import { isValidLoginForm } from "./features/isValidLoginForm";
+import { isValidLoginForm } from "./utils/isValidLoginForm";
 import SimpleLoading from "../../../ui/loading/simpleLoading.vue";
 
 const isLoading = ref(false);
