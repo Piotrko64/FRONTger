@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import BaseInput from "../../../ui/form/BaseInput.vue";
 
 import SimpleLoading from "../../../ui/loading/simpleLoading.vue";
@@ -8,10 +8,7 @@ import BaseButton from "../../../ui/form/BaseButton.vue";
 import IsAccountText from "../../../ui/form/IsAccountText.vue";
 import TheHumors from "./humorComponents/TheHumors.vue";
 import { HumorType } from "../../../@types/form/Humor";
-import { isValidForm } from "../../utils/isValidForm";
-
-const isLoading = ref(false);
-const isErrorInForm = ref(false);
+import { useHandleForm } from "../../../hooks/form/useHandleForm";
 
 const dataRegister: {
     email: string;
@@ -27,29 +24,17 @@ const dataRegister: {
     humor: "normal",
 });
 
-function sendRegisterForm() {
-    const { email, password } = dataRegister;
-    if (!isValidForm(email, password)) {
-        return;
-    } else {
-        alert("isGood");
-    }
-}
-
-function updateData(type: "email" | "password" | "nick" | "describe" | "humor", value: string) {
-    isErrorInForm.value = false;
-    dataRegister[type] = value;
-}
+const [sendRegisterForm, update, isErrorInForm, isLoading] = useHandleForm(dataRegister);
 </script>
 
 <template>
     <form @submit.prevent="sendRegisterForm">
         <h1>Register</h1>
-        <BaseInput @updateData="updateData" name="nick" :minLength="0" typeInput="text" notRequiredInput />
-        <BaseInput @updateData="updateData" name="email" :minLength="7" typeInput="email" />
-        <BaseInput @updateData="updateData" typeInput="password" name="password" :minLength="5" />
-        <TheHumors @updateData="updateData" />
-        <BaseTextarea name="describe" @updateData="updateData" placeholder="Write something about you!" />
+        <BaseInput @updateData="update" name="nick" :minLength="0" typeInput="text" />
+        <BaseInput @updateData="update" name="email" :minLength="7" typeInput="email" RequiredInput />
+        <BaseInput @updateData="update" typeInput="password" name="password" :minLength="5" RequiredInput />
+        <TheHumors @updateData="update" />
+        <BaseTextarea name="describe" @updateData="update" placeholder="Write something about you!" />
         <p v-if="isErrorInForm">There are errors in the form</p>
         <SimpleLoading v-if="isLoading" />
 

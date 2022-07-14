@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import BaseInput from "../../../ui/form/BaseInput.vue";
 import BaseButton from "../../../ui/form/BaseButton.vue";
-import { isValidForm } from "../../utils/isValidForm";
 import SimpleLoading from "../../../ui/loading/simpleLoading.vue";
 import IsAccountText from "../../../ui/form/IsAccountText.vue";
-
-const isLoading = ref(false);
-const isErrorInForm = ref(false);
+import { useHandleForm } from "../../../hooks/form/useHandleForm";
 
 const dataLogin: {
     email: string;
@@ -16,34 +13,14 @@ const dataLogin: {
     email: "",
     password: "",
 });
-
-function sendLoginForm() {
-    isErrorInForm.value = false;
-    if (!isValidForm(dataLogin.email, dataLogin.password)) {
-        isErrorInForm.value = true;
-        return;
-    }
-    isLoading.value = true;
-    console.log(dataLogin);
-}
-
-function updateData(type: "email" | "password", value: string) {
-    isErrorInForm.value = false;
-    dataLogin[type] = value;
-}
+const [sendLoginForm, update, isErrorInForm, isLoading] = useHandleForm(dataLogin);
 </script>
 
 <template>
     <form @submit.prevent="sendLoginForm">
         <h1>LOGIN</h1>
-        <BaseInput @updateData="updateData" name="email" :minLength="7" typeInput="email" RequiredInput />
-        <BaseInput
-            @updateData="updateData"
-            typeInput="password"
-            name="password"
-            :minLength="5"
-            RequiredInput
-        />
+        <BaseInput @updateData="update" name="email" :minLength="7" typeInput="email" RequiredInput />
+        <BaseInput @updateData="update" typeInput="password" name="password" :minLength="5" RequiredInput />
         <p v-if="isErrorInForm">There are errors in the form</p>
         <SimpleLoading v-if="isLoading" />
         <BaseButton type="submit" text="Login" :disabled="isErrorInForm || isLoading" />
