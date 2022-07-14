@@ -1,12 +1,17 @@
 <script setup lang="ts">
-const { text, type = "button" } = defineProps<{
+const {
+    text,
+    type = "button",
+    disabled = false,
+} = defineProps<{
     text: string;
     type: "button" | "submit";
+    disabled?: boolean;
 }>();
 </script>
 
 <template>
-    <button :type="type">
+    <button :type="type" :disabled="disabled">
         <div class="text">
             {{ text }}
         </div>
@@ -45,7 +50,10 @@ button {
         background-color: rgb(63, 170, 31);
         transition: all 0.3s ease;
     }
-    &:hover {
+    &:disabled {
+        background-color: rgb(204, 86, 86);
+    }
+    &:hover:enabled {
         &::after {
             width: 100%;
         }

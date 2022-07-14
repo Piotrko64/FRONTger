@@ -3,8 +3,10 @@ import { reactive, ref } from "vue";
 import BaseInput from "../../../ui/form/BaseInput.vue";
 import BaseButton from "../../../ui/form/BaseButton.vue";
 import { isValidLoginForm } from "./features/isValidLoginForm";
+import SimpleLoading from "../../../ui/loading/simpleLoading.vue";
 
-const isLogin = ref(false);
+const isLoading = ref(false);
+const isErrorInForm = ref(false);
 
 const dataLogin: {
     email: string;
@@ -15,13 +17,17 @@ const dataLogin: {
 });
 
 function sendLoginForm() {
+    isErrorInForm.value = false;
     if (!isValidLoginForm(dataLogin.email, dataLogin.password)) {
+        isErrorInForm.value = true;
         return;
     }
+    isLoading.value = true;
     console.log(dataLogin);
 }
 
 function updateData(type: "email" | "password", value: string) {
+    isErrorInForm.value = false;
     dataLogin[type] = value;
 }
 </script>
@@ -32,8 +38,9 @@ function updateData(type: "email" | "password", value: string) {
         <BaseInput @updateData="updateData" name="email" :minLength="7" />
 
         <BaseInput @updateData="updateData" typeInput="password" name="password" :minLength="5" />
-        <p v-if="isLogin"></p>
-        <BaseButton type="submit" text="Login" />
+        <p v-if="isErrorInForm">There are errors in the form</p>
+        <SimpleLoading v-if="isLoading" />
+        <BaseButton type="submit" text="Login" :disabled="isErrorInForm || isLoading" />
     </form>
 </template>
 <style lang="scss" scoped>
@@ -44,5 +51,11 @@ form {
     color: white;
     font-family: "Lato", sans-serif;
     border-radius: 15px;
+    p {
+        margin: 0;
+        color: red;
+        font-size: 0.9rem;
+        padding-bottom: 15px;
+    }
 }
 </style>
