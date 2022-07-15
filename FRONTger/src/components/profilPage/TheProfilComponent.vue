@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import BaseButton from "../../ui/form/BaseButton.vue";
-import OrdinaryButton from "../../ui/otherButtons/OrdinaryButton.vue";
+import { useStore } from "vuex";
+const store = useStore();
+const { nick, describe } = store.getters["myProfileModule/dataProfile"];
 </script>
 
 <template>
@@ -11,10 +12,9 @@ import OrdinaryButton from "../../ui/otherButtons/OrdinaryButton.vue";
             <div class="circle small"></div>
         </div>
 
-        <h1>Nick</h1>
+        <h1>{{ nick }}</h1>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente maiores in temporibus, odit
-            delectus ipsum vero perferendis sit provident per
+            {{ describe }}
         </p>
     </div>
 </template>
