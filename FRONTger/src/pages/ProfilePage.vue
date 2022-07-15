@@ -1,5 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TheProfilComponent from "../components/profilPage/TheProfilComponent.vue";
+</script>
 <template>
-    <div></div>
+    <TheProfilComponent />
 </template>
-<style lang="scss"></style>
+<style lang="scss" scoped></style>

@@ -8,19 +8,19 @@ import RouteElement from "./RouteElement.vue";
 
 const routePath = ref<string>("");
 const route = useRoute();
-const showNav = ref<boolean>(false);
+const showNav = ref<boolean>(true);
 
 watch([route], () => {
-    showNav.value = true;
+    showNav.value = false;
     routePath.value = route.fullPath;
     if (route.path === "/login" || route.path === "/register") {
-        showNav.value = false;
+        showNav.value = true;
     }
 });
 </script>
 <template>
     <nav>
-        <div class="logo">
+        <div class="logo" :class="{ showLogo: showNav }">
             <img :src="icon" alt="logo" />
         </div>
         <RouteElement
@@ -28,12 +28,12 @@ watch([route], () => {
             :img="route.img"
             :name="route.name"
             :route="route.route"
-            v-if="showNav"
+            v-if="!showNav"
         />
     </nav>
 </template>
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Rum+Raisin&display=swap");
+@import "../../assets/styles/font.scss";
 nav {
     height: 65px;
     background-color: rgb(46, 46, 61);
@@ -50,6 +50,9 @@ nav {
         display: none;
         justify-content: center;
         flex: 1;
+        &.showLogo {
+            display: flex;
+        }
         @media (min-width: 576px) {
             display: flex;
         }
