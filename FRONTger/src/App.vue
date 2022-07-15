@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import LoginPage from "./pages/LoginPage.vue";
+import TheLayout from "./ui/layout/TheLayout.vue";
 </script>
 
-<template><router-view></router-view></template>
+<template>
+    <TheLayout>
+        <router-view></router-view>
+    </TheLayout>
+</template>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");

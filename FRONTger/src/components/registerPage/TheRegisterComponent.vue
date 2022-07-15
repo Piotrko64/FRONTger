@@ -3,7 +3,6 @@ import FormRegister from "./componentsRegisterPage/FormRegister.vue";
 import StartBackground from "../../ui/background/StartBackground.vue";
 </script>
 <template>
-    <StartBackground />
     <div class="formRegister">
         <FormRegister />
     </div>

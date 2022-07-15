@@ -3,6 +3,5 @@ import TheRegisterComponent from "../components/registerPage/TheRegisterComponen
 </script>
 
 <template>
-    <StartBackground />
     <TheRegisterComponent />
 </template>
