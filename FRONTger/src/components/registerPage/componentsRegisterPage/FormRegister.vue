@@ -46,7 +46,7 @@ const [sendRegisterForm, update, isErrorInForm, isLoading] = useHandleForm(dataR
 form {
     padding: 15px;
     background-color: rgb(46, 46, 61);
-    width: clamp(260px, 25vw, 800px);
+    width: clamp(240px, 25vw, 800px);
     color: white;
     font-family: "Lato", sans-serif;
     border-radius: 15px;

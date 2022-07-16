@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useStore } from "vuex";
 import logout from "../../assets/icons/myProfile/logout.svg";
 import IfHumor from "./IfHumor.vue";
+import BaseModal from "../../ui/modals/BaseModal.vue";
+
 const store = useStore();
 const { nick, describe, profileImgUrl, humor } = store.getters["myProfileModule/dataProfile"];
+
+const openModalHumor = ref(false);
 </script>
 
 <template>
@@ -14,10 +19,10 @@ const { nick, describe, profileImgUrl, humor } = store.getters["myProfileModule/
             </div>
             <div class="circle"><img :src="profileImgUrl" /></div>
             <div class="circle small">
-                <IfHumor :humor="humor" />
+                <IfHumor :humor="humor" @click="openModalHumor = true" />
             </div>
         </div>
-
+        <BaseModal :open="openModalHumor"> aaaaaaa </BaseModal>
         <h1>{{ nick }}</h1>
         <p>
             {{ describe }}
