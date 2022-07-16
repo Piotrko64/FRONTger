@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { useStore } from "vuex";
+import logout from "../../assets/icons/myProfile/logout.svg";
+import IfHumor from "./IfHumor.vue";
 const store = useStore();
-const { nick, describe } = store.getters["myProfileModule/dataProfile"];
+const { nick, describe, profileImgUrl, humor } = store.getters["myProfileModule/dataProfile"];
 </script>
 
 <template>
     <div class="profilePage">
         <div class="youAndOptions">
-            <div class="circle small"></div>
-            <div class="circle"></div>
-            <div class="circle small"></div>
+            <div class="circle small">
+                <img :src="logout" alt="" />
+            </div>
+            <div class="circle"><img :src="profileImgUrl" /></div>
+            <div class="circle small">
+                <IfHumor :humor="humor" />
+            </div>
         </div>
 
         <h1>{{ nick }}</h1>
@@ -58,8 +64,14 @@ const { nick, describe } = store.getters["myProfileModule/dataProfile"];
             aspect-ratio: 1;
             border-radius: 50%;
             height: 100px;
-            background-color: aqua;
-            border: 1px solid white;
+            background-color: #2c3e50;
+            border: 2px solid white;
+            overflow: hidden;
+            img {
+                object-fit: cover;
+                width: 100%;
+            }
+            @include flex();
             @media (min-width: 768px) {
                 height: 150px;
                 border: 2px solid white;
@@ -70,8 +82,16 @@ const { nick, describe } = store.getters["myProfileModule/dataProfile"];
             }
             &.small {
                 height: 35px;
+                img {
+                    object-fit: contain;
+                    object-position: center;
+                    height: 20px;
+                }
                 @media (min-width: 768px) {
                     height: 70px;
+                    img {
+                        height: 35px;
+                    }
                 }
             }
         }
