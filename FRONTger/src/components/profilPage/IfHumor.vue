@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { computed, ref, watch } from "vue";
+import { useStore } from "vuex";
 import EmojiFrown from "../../assets/icons/humor/emoji-frown.svg";
 import EmojiLaughing from "../../assets/icons/humor/emoji-laughing.svg";
 import EmojiSmile from "../../assets/icons/humor/emoji-smile.svg";
 
-const { humor } = defineProps<{ humor: string }>();
+const store = useStore();
+const humor = computed(() => store.getters["myProfileModule/dataProfile"].humor);
 </script>
 <template>
     <img v-if="humor === 'sad'" :src="EmojiFrown" alt="" />

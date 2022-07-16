@@ -3,27 +3,33 @@ import { ref } from "vue";
 import { dataIconsHumor } from "./dataIconsHumor";
 import OneHumor from "./OneHumor.vue";
 import { HumorType } from "../../../../@types/form/Humor";
+import { useStore } from "vuex";
+
+const store = useStore();
+
+const HumorGetters = store.getters["myProfileModule/dataProfile"].humor;
 
 const emits = defineEmits(["updateData"]);
 
-const chooseHumor = ref<HumorType>("normal");
+const chooseHumor = ref<HumorType>(HumorGetters);
 
 function changeHumor(newHumor: HumorType) {
     chooseHumor.value = newHumor;
-    emits("updateData", "humor", chooseHumor);
-    console.log("updateData", "humor", chooseHumor);
+    emits("updateData", "humor", chooseHumor.value);
 }
 </script>
 <template>
-    <h2>Choose your today humor!</h2>
-    <div class="flex">
-        <OneHumor
-            v-for="humor in dataIconsHumor"
-            :icon="humor.icon"
-            :name="humor.name"
-            :chooseHumor="chooseHumor"
-            @changeHumor="changeHumor"
-        />
+    <div>
+        <h2>Choose your today humor!</h2>
+        <div class="flex">
+            <OneHumor
+                v-for="humor in dataIconsHumor"
+                :icon="humor.icon"
+                :name="humor.name"
+                :chooseHumor="chooseHumor"
+                @changeHumor="changeHumor"
+            />
+        </div>
     </div>
 </template>
 <style lang="scss">

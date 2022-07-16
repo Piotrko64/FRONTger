@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useStore } from "vuex";
+
 import logout from "../../assets/icons/myProfile/logout.svg";
+import pen from "../../assets/icons/myProfile/pen.svg";
 import IfHumor from "./IfHumor.vue";
 import BaseModal from "../../ui/modals/BaseModal.vue";
+import ModalHumor from "./modals/ModalHumor.vue";
 
 const store = useStore();
 const { nick, describe, profileImgUrl, humor } = store.getters["myProfileModule/dataProfile"];
@@ -17,12 +20,19 @@ const openModalHumor = ref(false);
             <div class="circle small">
                 <img :src="logout" alt="" />
             </div>
-            <div class="circle"><img :src="profileImgUrl" /></div>
+            <div class="relative">
+                <div class="circle">
+                    <img :src="profileImgUrl" />
+                </div>
+                <div class="circle circleHumor">
+                    <IfHumor :humor="humor" @click="openModalHumor = true" />
+                </div>
+            </div>
             <div class="circle small">
-                <IfHumor :humor="humor" @click="openModalHumor = true" />
+                <img :src="pen" />
             </div>
         </div>
-        <BaseModal :open="openModalHumor"> aaaaaaa </BaseModal>
+        <BaseModal :open="openModalHumor" @close="openModalHumor = false"> <ModalHumor /> </BaseModal>
         <h1>{{ nick }}</h1>
         <p>
             {{ describe }}
@@ -65,6 +75,17 @@ const openModalHumor = ref(false);
         @media (min-width: 1200px) {
             max-width: 900px;
         }
+        .relative {
+            position: relative;
+            .circleHumor {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                height: 25%;
+
+                border: none;
+            }
+        }
         .circle {
             aspect-ratio: 1;
             border-radius: 50%;
@@ -72,6 +93,8 @@ const openModalHumor = ref(false);
             background-color: #2c3e50;
             border: 2px solid white;
             overflow: hidden;
+            position: relative;
+
             img {
                 object-fit: cover;
                 width: 100%;
@@ -87,6 +110,7 @@ const openModalHumor = ref(false);
             }
             &.small {
                 height: 35px;
+                cursor: pointer;
                 img {
                     object-fit: contain;
                     object-position: center;
