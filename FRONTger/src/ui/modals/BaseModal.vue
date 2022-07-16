@@ -7,7 +7,7 @@ const emits = defineEmits(["close"]);
         <div class="entireModal" v-if="open" @click="emits('close')"></div>
     </transition>
     <transition name="pop"
-        ><div class="modal" v-if="open" @click="emits('close')"><slot></slot></div
+        ><div class="modal" v-if="open"><slot></slot></div
     ></transition>
 </template>
 <style lang="scss" scoped>

@@ -4,11 +4,11 @@ import { ref } from "vue";
 const { name, placeholder, readyValue } = defineProps<{
     name: string;
     placeholder: string;
-    readyValue: string;
+    readyValue?: string;
 }>();
 const emits = defineEmits(["updateData"]);
 
-const valueInput = ref<string>(readyValue);
+const valueInput = ref<string>(readyValue || "");
 </script>
 <template>
     <div class="entireTextarea">
@@ -36,7 +36,7 @@ const valueInput = ref<string>(readyValue);
     }
     textarea {
         flex-direction: column;
-        min-height: 100px;
+        min-height: 200px;
         width: 100%;
         color: white;
         background-color: rgba(255, 255, 255, 0.103);

@@ -15,7 +15,6 @@ export function useHandleForm(objData: DataObjInterface): ReturnArrayHook {
             return;
         }
         isLoading.value = true;
-        console.log(objData);
     }
 
     function update(type: InputsData, value: string) {

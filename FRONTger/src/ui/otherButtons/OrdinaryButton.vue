@@ -3,10 +3,12 @@ const { text, color } = defineProps<{
     text: string;
     color: string;
 }>();
+
+const emits = defineEmits(["action"]);
 </script>
 
 <template>
-    <button type="button" :style="{ backgroundColor: color }">
+    <button :style="{ backgroundColor: color }" @click="emits('action')">
         {{ text }}
     </button>
 </template>
@@ -18,16 +20,17 @@ button {
     font-family: "Lato";
     border: none;
     color: white;
-
+    width: 100%;
     padding: 10px;
     border-radius: 5px;
-    margin-top: 40px;
+    margin-top: 20px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     @media (min-width: 992px) {
         font-size: 1.4rem;
     }

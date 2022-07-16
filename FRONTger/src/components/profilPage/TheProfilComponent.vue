@@ -8,9 +8,10 @@ import IfHumor from "./IfHumor.vue";
 import BaseModal from "../../ui/modals/BaseModal.vue";
 import ModalHumor from "./modals/ModalHumor.vue";
 import EditProfil from "./EditProfil.vue";
+import { computed } from "@vue/reactivity";
 
 const store = useStore();
-const { nick, describe, profileImgUrl, humor } = store.getters["myProfileModule/dataProfile"];
+const getter = computed(() => store.getters["myProfileModule/dataProfile"]);
 
 const openModalHumor = ref(false);
 const openEditModal = ref(false);
@@ -24,21 +25,25 @@ const openEditModal = ref(false);
             </div>
             <div class="relative">
                 <div class="circle">
-                    <img :src="profileImgUrl" />
+                    <img :src="getter.profileImgUrl" />
                 </div>
                 <div class="circle circleHumor">
-                    <IfHumor :humor="humor" @click="openModalHumor = true" />
+                    <IfHumor :humor="getter.humor" @click="openModalHumor = true" />
                 </div>
             </div>
             <div class="circle small" @click="openEditModal = true">
                 <img :src="pen" />
             </div>
         </div>
-        <BaseModal :open="openModalHumor" @close="openModalHumor = false"> <ModalHumor /> </BaseModal>
-        <BaseModal :open="openEditModal" @close="openEditModal = false"> <EditProfil /> </BaseModal>
-        <h1>{{ nick }}</h1>
+        <BaseModal :open="openModalHumor" @close="openModalHumor = false">
+            <ModalHumor @close="openModalHumor = false" />
+        </BaseModal>
+        <BaseModal :open="openEditModal" @close="openEditModal = false">
+            <EditProfil @close="openEditModal = false" />
+        </BaseModal>
+        <h1>{{ getter.nick }}</h1>
         <p>
-            {{ describe }}
+            {{ getter.describe }}
         </p>
     </div>
 </template>
