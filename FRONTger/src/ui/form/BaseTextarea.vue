@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const { name, placeholder } = defineProps<{ name: string; placeholder: string }>();
+const { name, placeholder, readyValue } = defineProps<{
+    name: string;
+    placeholder: string;
+    readyValue: string;
+}>();
 const emits = defineEmits(["updateData"]);
 
-const valueInput = ref<string>("");
+const valueInput = ref<string>(readyValue);
 </script>
 <template>
     <div class="entireTextarea">

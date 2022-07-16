@@ -6,18 +6,20 @@ const {
     typeInput = "text",
     name,
     minLength,
+    readyValue = "",
 } = defineProps<{
     RequiredInput?: boolean;
     typeInput?: string;
     name: string;
     minLength: number;
+    readyValue?: string;
 }>();
 
 const emits = defineEmits(["updateData"]);
 
 const errorInputMesage: Ref<string> = ref("");
 const isBlur: Ref<boolean> = ref(false);
-const valueInput: Ref<string> = ref("");
+const valueInput: Ref<string> = ref(readyValue || "");
 const isValid: Ref<boolean> = ref(true);
 
 watch([isBlur], () => {

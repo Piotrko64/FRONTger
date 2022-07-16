@@ -7,11 +7,13 @@ import pen from "../../assets/icons/myProfile/pen.svg";
 import IfHumor from "./IfHumor.vue";
 import BaseModal from "../../ui/modals/BaseModal.vue";
 import ModalHumor from "./modals/ModalHumor.vue";
+import EditProfil from "./EditProfil.vue";
 
 const store = useStore();
 const { nick, describe, profileImgUrl, humor } = store.getters["myProfileModule/dataProfile"];
 
 const openModalHumor = ref(false);
+const openEditModal = ref(false);
 </script>
 
 <template>
@@ -28,11 +30,12 @@ const openModalHumor = ref(false);
                     <IfHumor :humor="humor" @click="openModalHumor = true" />
                 </div>
             </div>
-            <div class="circle small">
+            <div class="circle small" @click="openEditModal = true">
                 <img :src="pen" />
             </div>
         </div>
         <BaseModal :open="openModalHumor" @close="openModalHumor = false"> <ModalHumor /> </BaseModal>
+        <BaseModal :open="openEditModal" @close="openEditModal = false"> <EditProfil /> </BaseModal>
         <h1>{{ nick }}</h1>
         <p>
             {{ describe }}
@@ -82,7 +85,7 @@ const openModalHumor = ref(false);
                 bottom: 0;
                 right: 0;
                 height: 25%;
-
+                cursor: pointer;
                 border: none;
             }
         }
