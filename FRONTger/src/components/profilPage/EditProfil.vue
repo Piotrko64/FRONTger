@@ -54,8 +54,6 @@ function saveNewData() {
     </form>
 </template>
 <style lang="scss" scoped>
-h2 {
-}
 p {
     margin: 15px auto;
     margin: 0;
