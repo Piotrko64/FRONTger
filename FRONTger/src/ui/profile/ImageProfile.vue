@@ -41,14 +41,18 @@ function openModalHumorFn() {
 
 .relative {
     position: relative;
-    .thumbnail {
+    width: min-content;
+    &.thumbnail {
         .circle {
+            height: 75px;
+            border: 3px solid white;
             img {
-                height: 50px;
                 border: 50%;
                 aspect-ratio: 1;
-                border: 1px solid white;
             }
+        }
+        .circleHumor {
+            height: 35%;
         }
     }
     .circleHumor {
@@ -62,6 +66,7 @@ function openModalHumorFn() {
         border: none;
         cursor: pointer;
         border: none;
+        display: flex;
         &.disabled {
             cursor: default;
         }
