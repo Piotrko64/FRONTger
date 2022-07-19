@@ -9,7 +9,7 @@ const store = useStore();
 
 const HumorGetters = store.getters["myProfileModule/dataProfile"].humor;
 
-const emits = defineEmits(["updateData"]);
+const emits = defineEmits(["updateData", "close"]);
 
 const chooseHumor = ref<HumorType>(HumorGetters);
 
@@ -28,6 +28,7 @@ function changeHumor(newHumor: HumorType) {
                 :name="humor.name"
                 :chooseHumor="chooseHumor"
                 @changeHumor="changeHumor"
+                @click="emits('close')"
             />
         </div>
     </div>
