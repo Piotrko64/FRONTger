@@ -71,10 +71,6 @@ const { nick, describe } = defineProps<{
             overflow: hidden;
             position: relative;
 
-            img {
-                object-fit: cover;
-                width: 100%;
-            }
             @include flex();
             @media (min-width: 768px) {
                 height: 150px;
@@ -88,8 +84,6 @@ const { nick, describe } = defineProps<{
                 height: 35px;
                 cursor: pointer;
                 img {
-                    object-fit: contain;
-                    object-position: center;
                     height: 20px;
                 }
                 @media (min-width: 768px) {

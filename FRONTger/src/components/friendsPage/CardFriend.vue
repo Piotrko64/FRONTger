@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
 import ImageProfile from "../../ui/profile/ImageProfile.vue";
+import { useCardFriend } from "./hooks/useCardFriend";
 
-const { img, nick, humor, searchText } = defineProps<{
+const props = defineProps<{
     img: string;
     nick: string;
     searchText: string;
     humor: string;
+    id: string;
+    describe: string;
 }>();
 
-const nickWithHighlight = ref<string>(setHighlightNick());
-
-watch(
-    () => nick,
-    () => (nickWithHighlight.value = setHighlightNick())
+const [id, img, humor, describe, searchText, nickWithHighlight, routeTo] = useCardFriend(
+    props.id,
+    props.img,
+    props.humor,
+    props.nick,
+    props.searchText,
+    props.describe
 );
-
-function setHighlightNick() {
-    const findIndex = nick.toLowerCase().indexOf(searchText.toLowerCase());
-    if (findIndex === -1) return nick;
-    const lengthSearchText = searchText.length;
-    return `${findIndex} ,${nick.slice(0, findIndex)}<span>${nick.slice(
-        findIndex,
-        findIndex + lengthSearchText
-    )}</span>${nick.slice(findIndex + lengthSearchText)}`;
-}
+console.log(id);
 </script>
 
 <template>
-    <div class="card">
+    <div class="card" @click="routeTo(id)">
         <ImageProfile thumbnail :img="img" :humor="humor" />
         <div class="about">
             <h3 v-html="nickWithHighlight"></h3>
             <p>aaa</p>
+        </div>
+        <div class="threeDot">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
     </div>
 </template>
@@ -51,9 +51,7 @@ function setHighlightNick() {
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    &:hover {
-        transform: scale(1.05);
-    }
+
     .about {
         @include flex;
         flex-direction: column;
@@ -85,6 +83,24 @@ function setHighlightNick() {
             @media (min-width: 992px) {
                 font-size: 1.2rem;
             }
+        }
+    }
+    .threeDot {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        margin-left: auto;
+
+        &:hover .dot {
+            margin-bottom: 6px;
+        }
+        .dot {
+            transition: all 0.3s ease;
+            width: 6px;
+            aspect-ratio: 1;
+            background-color: white;
+            border-radius: 50%;
+            margin-bottom: 3px;
         }
     }
 }

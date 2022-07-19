@@ -13,7 +13,9 @@ const a = ref("am2");
             :humor="friend.humor"
             :nick="friend.nick"
             :img="friend.imgProfileUrl"
-            :search-text="a"
+            :searchText="a"
+            :id="friend.id"
+            :describe="friend.describe"
         />
     </div>
 </template>
