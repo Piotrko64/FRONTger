@@ -47,7 +47,7 @@ watch([isBlur], () => {
             @blur="isBlur = true"
             @focus="isBlur = false"
             :placeholder="RequiredInput ? '' : 'Optional'"
-            maxlength="100"
+            maxlength="50"
         />
         <p v-if="!isValid && isBlur">{{ errorInputMesage }}</p>
     </div>

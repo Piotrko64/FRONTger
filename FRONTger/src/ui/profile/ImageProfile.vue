@@ -44,7 +44,11 @@ function openModalHumorFn() {
     width: min-content;
     &.thumbnail {
         .circle {
-            height: 75px;
+            height: 50px;
+            @media (min-width: 992px) {
+                height: 75px;
+            }
+
             border: 3px solid white;
             img {
                 border: 50%;

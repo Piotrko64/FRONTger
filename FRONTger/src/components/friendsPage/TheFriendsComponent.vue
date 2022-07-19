@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import CardFriend from "./CardFriend.vue";
 import { exampleFriends } from "./exampleFriends";
+
+const a = ref("am2");
 </script>
 
 <template>
@@ -9,8 +12,8 @@ import { exampleFriends } from "./exampleFriends";
             v-for="friend in exampleFriends"
             :humor="friend.humor"
             :nick="friend.nick"
-            :describe="friend.describe.slice(0, 120) + '...'"
             :img="friend.imgProfileUrl"
+            :search-text="a"
         />
     </div>
 </template>

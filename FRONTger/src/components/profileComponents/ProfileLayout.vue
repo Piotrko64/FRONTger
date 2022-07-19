@@ -38,6 +38,8 @@ const { nick, describe } = defineProps<{
     h1 {
         margin: 20px 0 0 0;
         font-family: "Rum Raisin", sans-serif;
+        padding: 0 10px;
+        word-break: break-all;
         @media (min-width: 1200px) {
             font-size: 4rem;
         }

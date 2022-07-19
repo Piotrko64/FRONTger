@@ -18,6 +18,7 @@ const valueInput = ref<string>(readyValue || "");
             @input="emits('updateData', name, valueInput)"
             v-model="valueInput"
             :placeholder="placeholder"
+            maxlength="300"
         >
         </textarea>
     </div>
