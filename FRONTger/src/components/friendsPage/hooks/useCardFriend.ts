@@ -8,10 +8,21 @@ export function useCardFriend(
     nick: string,
     searchText: string,
     describe: string
-): [string, string, string, string, string, Ref<string>, (idFriend: string) => void] {
+): [
+    string,
+    string,
+    string,
+    string,
+    string,
+    Ref<string>,
+    (idFriend: string) => void,
+    Ref<boolean>,
+    (bool: boolean) => void
+] {
     const router = useRouter();
-
     const nickWithHighlight = ref<string>(setHighlightNick());
+
+    const openModal = ref<boolean>(false);
 
     watch(
         () => nick,
@@ -32,5 +43,9 @@ export function useCardFriend(
         router.push(`/friendProfile/${idFriend}`);
     }
 
-    return [id, img, humor, describe, searchText, nickWithHighlight, routeTo];
+    function toggleModal(bool: boolean) {
+        openModal.value = bool;
+    }
+
+    return [id, img, humor, describe, searchText, nickWithHighlight, routeTo, openModal, toggleModal];
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ImageProfile from "../../ui/profile/ImageProfile.vue";
 import { useCardFriend } from "./hooks/useCardFriend";
+import ThreeDotsModal from "./ThreeDotsModal.vue";
 
 const props = defineProps<{
     img: string;
@@ -11,15 +12,8 @@ const props = defineProps<{
     describe: string;
 }>();
 
-const [id, img, humor, describe, searchText, nickWithHighlight, routeTo] = useCardFriend(
-    props.id,
-    props.img,
-    props.humor,
-    props.nick,
-    props.searchText,
-    props.describe
-);
-console.log(id);
+const [id, img, humor, describe, searchText, nickWithHighlight, routeTo, openModal, toggleModal] =
+    useCardFriend(props.id, props.img, props.humor, props.nick, props.searchText, props.describe);
 </script>
 
 <template>
@@ -29,11 +23,10 @@ console.log(id);
             <h3 v-html="nickWithHighlight"></h3>
             <p>aaa</p>
         </div>
-        <div class="threeDot">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+        <div class="threeDot" @click.stop="toggleModal(true)">
+            <div v-for="dot in 3" class="dot" :key="dot"></div>
         </div>
+        <ThreeDotsModal v-if="openModal" @closeModal="toggleModal(false)" :open="openModal" />
     </div>
 </template>
 <style lang="scss">
@@ -49,6 +42,7 @@ console.log(id);
     justify-content: flex-start;
     padding: 15px;
     border-radius: 15px;
+    position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
 
