@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { onMounted, Ref, ref } from "vue";
+import { onMounted, ref } from "vue";
 
-const { open } = defineProps<{ open: boolean }>();
 const emits = defineEmits(["closeModal"]);
 
 const modal = ref();
@@ -11,7 +10,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="modal" ref="modal" tabindex="0" @blur="emits('closeModal')">aaaaaaa</div>
+    <div class="modal" ref="modal" tabindex="0" @blur="emits('closeModal')">
+        <div class="option add-delete">Add/Delete</div>
+        <div class="option look">Look</div>
+    </div>
 </template>
 <style lang="scss">
 @import "../../assets/styles/flex.scss";
@@ -24,6 +26,7 @@ onMounted(() => {
     top: 15px;
     outline: none;
     border-radius: 5px;
-    padding: 3px;
+    padding: 8px;
+    font-size: 1.2rem;
 }
 </style>

@@ -26,7 +26,9 @@ const [id, img, humor, describe, searchText, nickWithHighlight, routeTo, openMod
         <div class="threeDot" @click.stop="toggleModal(true)">
             <div v-for="dot in 3" class="dot" :key="dot"></div>
         </div>
-        <ThreeDotsModal v-if="openModal" @closeModal="toggleModal(false)" :open="openModal" />
+        <transition name="pop">
+            <ThreeDotsModal v-if="openModal" @closeModal="toggleModal(false)" :open="openModal" />
+        </transition>
     </div>
 </template>
 <style lang="scss">
@@ -84,18 +86,32 @@ const [id, img, humor, describe, searchText, nickWithHighlight, routeTo, openMod
         flex-direction: column;
         align-self: flex-start;
         margin-left: auto;
-
+        padding: 10px;
+        box-sizing: border-box;
+        transform: translate(10px, -10px);
         &:hover .dot {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .dot {
             transition: all 0.3s ease;
-            width: 6px;
+            width: 7px;
             aspect-ratio: 1;
             background-color: white;
             border-radius: 50%;
-            margin-bottom: 3px;
+            margin-bottom: 6px;
         }
+    }
+    .pop-enter-active,
+    .pop-leave-active {
+        transform-origin: right;
+
+        transition: all 0.2s cubic-bezier(0.5, 0, 0.5, 1);
+    }
+
+    .pop-enter-from,
+    .pop-leave-to {
+        opacity: 0;
+        transform: scale(0.3) translateY(-50%);
     }
 }
 </style>
