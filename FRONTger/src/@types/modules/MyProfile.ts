@@ -5,3 +5,8 @@ export interface StateMyProfile {
     humor: HumorType;
     profileImgUrl: string;
 }
+export interface StateAuth extends StateMyProfile {
+    isAuth: boolean;
+    token: string;
+    errAuth: null | true;
+}
